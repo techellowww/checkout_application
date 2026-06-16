@@ -1,0 +1,49 @@
+api_version = "2026-04"
+
+[[extensions]]
+name = "custom-checkout"
+handle = "custom-checkout"
+type = "ui_extension"
+uid = "d2d9b780-e114-6af9-22b8-4684715234a21014a3ad"
+
+[[extensions.targeting]]
+module = "./src/ShippingNote.jsx"
+target = "purchase.checkout.shipping-option-list.render-before"
+
+[[extensions.targeting]]
+module = "./src/UpsellCards.jsx"
+target = "purchase.checkout.cart-line-list.render-after"
+
+[[extensions.targeting]]
+module = "./src/CutoffTimer.jsx"
+target = "purchase.checkout.reductions.render-before"
+
+[[extensions.targeting]]
+module = "./src/LimitedOffer.jsx"
+target = "purchase.checkout.reductions.render-after"
+
+[extensions.capabilities]
+api_access = true
+network_access = true
+
+[[extensions.metafields]]
+namespace = "$app"
+key = "requestedFreeGift"
+
+[[extensions.metafields]]
+namespace = "$app"
+key = "upsell_products"
+
+[extensions.settings]
+
+[[extensions.settings.fields]]
+key = "limited_offer_code"
+type = "single_line_text_field"
+name = "Limited Offer Code"
+description = "Discount code to display. Defaults to SAVE10 + VIP Membership"
+
+[[extensions.settings.fields]]
+key = "shipping_note_text"
+type = "single_line_text_field"
+name = "Shipping Note Text"
+description = "Text for shipping note banner"
