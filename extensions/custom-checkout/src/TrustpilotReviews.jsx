@@ -17,7 +17,7 @@ import { useExtensionData } from "@shopify/ui-extensions/checkout/preact";
 const FALLBACK = {
   summary: { rating: 4.9, total: 879 },
   reviews: [
-    { id: "1", author: "Nick Pirollo",  date: "2 days ago", rating: 5, title: "Quality products",      body: "Great products and amazing delivery timing." },
+    { id: "1", author: "Nick Pirollo",  date: "2 days ago", rating: 5, title: "Quality products",      body: "Great products and amazing delivery timing and good quality." },
     { id: "2", author: "Lily Brown",    date: "2 days ago", rating: 5, title: "Great customer service", body: "Great customer service. Impressive packaging and good quality." },
     { id: "3", author: "James Carter",  date: "3 days ago", rating: 5, title: "Fast shipping",          body: "Arrived faster than expected. Will definitely order again." },
   ],
@@ -101,7 +101,7 @@ export default function TrustpilotReviews() {
                 padding="small"
                 border="base base solid"
                 borderRadius="base"
-                background="subdued"
+                background="base"
               >
                 <s-stack gap="extra-tight">
                   <Stars count={r.rating} />
@@ -110,8 +110,8 @@ export default function TrustpilotReviews() {
                     <s-text type="small" color="subdued">, {r.date}</s-text>
                   </s-stack>
                   <s-stack direction="inline" gap="extra-tight" alignItems="center">
-                    <s-icon type="checkmark-circle" size="small" tone="subdued" />
-                    <s-text color="subdued" type="small">Verified</s-text>
+                    {/*<s-icon type="checkmark-circle" size="small" tone="subdued" /> */}
+                    <s-text color="subdued" type="small"><s-text type="small" tone="success">✔ </s-text>Verified</s-text>
                   </s-stack>
                   {r.title ? <s-text type="strong">{r.title}</s-text> : null}
                   <s-text type="small">{r.body}</s-text>
@@ -150,12 +150,17 @@ export default function TrustpilotReviews() {
           <s-divider />
 
           <s-stack direction="inline" gap="base" alignItems="center">
-            <s-icon type="checkmark-circle" size="base" tone="success" />
+            <s-icon type="star" size="base" tone="success" />
             <s-stack gap="none">
               <s-text type="strong">99% Purity</s-text>
+             <s-stack gap="none">
               <s-text type="small" color="subdued">
-                All our products are routinely tested to ensure optimal quality.
+                All our products are routinely tested for optimal 
               </s-text>
+              <s-text type="small" color="subdued">
+                quality.
+              </s-text>
+            </s-stack>
             </s-stack>
           </s-stack>
 
@@ -165,9 +170,14 @@ export default function TrustpilotReviews() {
             <s-icon type="profile" size="base" tone="success" />
             <s-stack gap="none">
               <s-text type="strong">Customer Service</s-text>
-              <s-text type="small" color="subdued">
-                We answer your questions Monday to Friday from 9am to 6pm.
-              </s-text>
+              <s-stack gap="none">
+                <s-text type="small" color="subdued">
+                  We answer your questions Monday to Friday 
+                </s-text>
+                <s-text type="small" color="subdued">
+                  from 9am to 6pm.
+                </s-text>
+              </s-stack>
             </s-stack>
           </s-stack>
         </s-stack>

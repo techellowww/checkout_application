@@ -104,9 +104,9 @@
 //         `);
 //         if (res.data?.products?.nodes) {
 //           const nodes = res.data.products.nodes;
-          
+
 //           const findAndMapVariant = (keywords, defaultObj) => {
-//             const match = nodes.find(n => 
+//             const match = nodes.find(n =>
 //               keywords.some(k => n.title.toLowerCase().includes(k) || n.handle.toLowerCase().includes(k))
 //             );
 //             if (match && match.variants?.nodes?.[0]) {
@@ -138,8 +138,8 @@
 //   }, [api]);
 
 //   const getCartLine = (item) => {
-//     return cartLines.find(line => 
-//       line.merchandise.id === item.id || 
+//     return cartLines.find(line =>
+//       line.merchandise.id === item.id ||
 //       line.merchandise.title.toLowerCase().includes(item.title.toLowerCase())
 //     );
 //   };
@@ -200,15 +200,15 @@
 //             }).format(parseFloat(item.price));
 
 //         return (
-//           <s-box 
-//             key={item.id} 
-//             padding="base" 
-//             border="base base solid" 
-//             borderRadius="base" 
+//           <s-box
+//             key={item.id}
+//             padding="base"
+//             border="base base solid"
+//             borderRadius="base"
 //             background={isAdded ? "subdued" : "base"}
 //           >
 //             <s-stack direction="inline" gap="small" alignItems="start">
-//               <s-checkbox 
+//               <s-checkbox
 //                 checked={isAdded}
 //                 disabled={loadingId !== null}
 //                 onChange={() => handleToggle(item)}
@@ -260,7 +260,6 @@
 //   );
 // }
 
-
 import "@shopify/ui-extensions/preact";
 import { render } from "preact";
 import { useState, useEffect } from "preact/hooks";
@@ -283,10 +282,7 @@ function ImageOrPlaceholder({ imageUrl }) {
       borderRadius="base"
     >
       {imageUrl ? (
-        <s-image
-          src={imageUrl}
-          aspectRatio={1}
-        />
+        <s-image src={imageUrl} aspectRatio={1} />
       ) : (
         <s-stack
           inlineSize="60px"
@@ -309,29 +305,28 @@ export default function UpsellCards() {
   const [items, setItems] = useState([]);
   const [loadingId, setLoadingId] = useState(null);
 
-useEffect(() => {
-  if (!shop?.myshopifyDomain) {
-    return;
-  }
+  useEffect(() => {
+    if (!shop?.myshopifyDomain) {
+      return;
+    }
 
-  const url =
-    `https://inbox-bias-supplements-opt.trycloudflare.com/api/upsell-products?shop=${encodeURIComponent(
-      shop.myshopifyDomain
+    const url = `https://agency-grade-speakers-unavailable.trycloudflare.com/api/upsell-products?shop=${encodeURIComponent(
+      shop.myshopifyDomain,
     )}`;
 
-  // console.log("FETCH URL", url);
+    // console.log("FETCH URL", url);
 
-  fetch(url)
-    .then((r) => {
-      return r.json();
-    })
-    .then((data) => {
-      setItems(data.products || []);
-    })
-    .catch((err) => {
-      console.error("FETCH ERROR", err);
-    });
-}, [shop?.myshopifyDomain]);
+    fetch(url)
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        setItems(data.products || []);
+      })
+      .catch((err) => {
+        console.error("FETCH ERROR", err);
+      });
+  }, [shop?.myshopifyDomain]);
 
   if (items.length === 0) {
     return null;
@@ -394,31 +389,42 @@ useEffect(() => {
 
         return (
           <s-box
-  key={item.variantId}
-  padding="small"
-  border="base base solid"
-  borderRadius="base"
-  background={isAdded ? "subdued" : "base"}
->
+            key={item.variantId}
+            padding="small"
+            border="base base solid"
+            borderRadius="base"
+            background={isAdded ? "subdued" : "base"}
+          >
             <s-stack direction="inline" gap="small" alignItems="start">
               <s-checkbox
                 checked={isAdded}
                 disabled={loadingId !== null}
                 onChange={() => handleToggle(item)}
               />
-              <ImageOrPlaceholder imageUrl={item.imageUrl} />
+              <s-box
+                inlineSize="56px"
+                blockSize="56px"
+                border="base base solid"
+                borderRadius="base base base base"
+              >
+                <s-image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  aspectRatio="1/1"
+                  objectFit="cover"
+                  border="none"
+                  borderRadius="base base base base"
+                />
+              </s-box>
               <s-stack gap="small-100">
                 <s-stack gap="none">
-  <s-text size="small">
-    {item.title}
-  </s-text>
-
-  {formattedPrice && (
-    <s-text appearance="subdued" size="small">
-      {formattedPrice}
-    </s-text>
-  )}
-</s-stack>
+                  <s-text size="small">{item.title}</s-text>
+                  {formattedPrice && (
+                    <s-text type="small" color="subdued">
+                      {formattedPrice}
+                    </s-text>
+                  )}
+                </s-stack>
               </s-stack>
             </s-stack>
           </s-box>

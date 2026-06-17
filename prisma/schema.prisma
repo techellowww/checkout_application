@@ -47,3 +47,29 @@ model UpsellProduct {
 
   @@unique([shop, variantId])
 }
+
+model CheckoutBranding {
+  id            String   @id @default(cuid())
+  shop          String   @unique
+  
+  // Design System (Global values)
+  primaryColor  String   @default("#d40000")
+  secondaryColor String  @default("#646464")
+  fontFamily    String   @default("system-ui")
+  
+  // Main Section Customizations
+  mainSectionPadding      String  @default("LARGE_400")
+  mainSectionCornerRadius String  @default("BASE")
+  mainSectionColorScheme  String  @default("COLOR_SCHEME1")
+  
+  // Order Summary Section Customizations
+  orderSummarySectionPadding      String  @default("LARGE_400")
+  orderSummarySectionCornerRadius String  @default("BASE")
+  orderSummarySectionColorScheme  String  @default("COLOR_SCHEME1")
+  
+  // Shopify Reference
+  checkoutProfileId String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

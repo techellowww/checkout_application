@@ -31,9 +31,9 @@ function LimitedOffer() {
     let isMounted = true;
 
     async function init() {
-      const storageKey = 'checkout_timer_start_time';
+      const storageKey = "checkout_timer_start_time";
       let startStr = await api.storage.read(storageKey);
-      
+
       let startTime;
       if (!startStr) {
         startTime = Date.now();
@@ -49,7 +49,7 @@ function LimitedOffer() {
 
       timer = setInterval(() => {
         const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-        const remaining = (10 * 60) - (elapsedSeconds % (10 * 60));
+        const remaining = 10 * 60 - (elapsedSeconds % (10 * 60));
         setTimeLeft(remaining);
       }, 1000);
     }
@@ -62,7 +62,9 @@ function LimitedOffer() {
     };
   }, [api]);
 
-  const minutes = Math.floor(timeLeft / 60).toString().padStart(2, "0");
+  const minutes = Math.floor(timeLeft / 60)
+    .toString()
+    .padStart(2, "0");
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
   const rawCode = settings.limited_offer_code || "SAVE10 + VIP Membership";
@@ -74,43 +76,44 @@ function LimitedOffer() {
     codeSuffix = "";
   }
 
-return (
-  <s-box
-    padding="large"
-    border="base base solid"
-    borderRadius="large"
-    background="subdued"
-  >
-    <s-stack gap="base" alignItems="center">
-      <s-text tone="info" emphasis="bold">
-        🔥 LIMITED OFFER
-      </s-text>
-
-      <s-heading level="2">
-        20% OFF Your Order
-      </s-heading>
-
-      <s-text>
-        Use code{" "}
-        <s-text emphasis="bold" tone="info">
-          {codeMain}
+  return (
+    <s-box
+      padding="large"
+      border="base base solid"
+      borderRadius="large"
+      background="base"
+    >
+      <s-stack gap="none" alignItems="center">
+        <s-text tone="info" type="strong">
+          ✦ LIMITED OFFER
         </s-text>
-        {codeSuffix}
-      </s-text>
-
-      <s-box
-        padding="small"
-        border="base base solid"
-        borderRadius="large"
-        background="base"
-      >
-        <s-stack direction="inline" gap="small" alignItems="center">
-          <s-text tone="critical" emphasis="bold">
-            ⏰ Expires in {minutes}:{seconds}
+        {/*<s-heading>20% OFF Your Order</s-heading>⏰ */}
+        <s-text type="strong" tone="critical">
+          20% OFF Your Order
+        </s-text>
+        <s-text>
+          Use code{" "}
+          <s-text tone="info" type="strong">
+            {codeMain}
+            {codeSuffix}
           </s-text>
-        </s-stack>
-      </s-box>
-    </s-stack>
-  </s-box>
- );
+        </s-text>
+        <s-box
+          padding="none"
+          border="none"
+          borderRadius="small"
+          background="base"
+        >
+          <s-stack direction="inline" gap="small" alignItems="center">
+            <s-text tone="neutral" type="emphasis">
+              Expires in{" "}
+              <s-text type="strong" tone="warning">
+                {minutes}:{seconds}
+              </s-text>
+            </s-text>
+          </s-stack>
+        </s-box>
+      </s-stack>
+    </s-box>
+  );
 }

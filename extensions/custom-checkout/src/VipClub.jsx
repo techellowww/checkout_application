@@ -9,81 +9,48 @@ export default function VipClub() {
       background="base"
     >
       <s-stack gap="small">
-
         <s-stack
           direction="inline"
           justifyContent="space-between"
           alignItems="center"
         >
-          <s-text type="strong">
+          <s-text type="strong"  direction="inline"
+          justifyContent="space-between"
+          alignItems="center">
+            <s-checkbox>Join VIP Membership</s-checkbox>
             Join The Prime VIP Club!
           </s-text>
-
-          <s-badge tone="success">
-            FREE TRIAL
-          </s-badge>
+          <s-badge tone="neutral"><s-text tone="auto" type="small" paddingInline="base">FREE TRIAL</s-text></s-badge>          
         </s-stack>
 
         <s-text size="small">
-          Join Prime VIP Club and enjoy 10% off every order,
-          free express 2-day shipping and priority processing.
+          Join Prime VIP Club and enjoy 10% off every order, free express 2-day
+          shipping and priority processing.
         </s-text>
 
-        <s-box
-          padding="small"
-          background="subdued"
-          borderRadius="base"
-        >
-          <s-stack gap="tight">
+        <s-box padding="base" background="subdued" borderRadius="base">
+          <s-stack gap="small large">
+            <s-stack direction="inline" justifyContent="space-between">
+              <s-text size="small">10% VIP Discount</s-text>
 
-            <s-stack
-              direction="inline"
-              justifyContent="space-between"
-            >
-              <s-text size="small">
-                10% VIP Discount
-              </s-text>
-
-              <s-text type="strong">
-                $16.25
-              </s-text>
+              <s-text type="strong">$16.25</s-text>
             </s-stack>
 
-            <s-stack
-              direction="inline"
-              justifyContent="space-between"
-            >
-              <s-text size="small">
-                Free 2-Day Shipping
-              </s-text>
+            <s-stack direction="inline" justifyContent="space-between">
+              <s-text size="small">Free 2-Day Shipping</s-text>
 
-              <s-text type="strong">
-                $25.00
-              </s-text>
+              <s-text type="strong">$25.00</s-text>
             </s-stack>
 
             <s-divider />
 
-            <s-stack
-              direction="inline"
-              justifyContent="space-between"
-            >
-              <s-text type="strong">
-                Total Savings
-              </s-text>
+            <s-stack direction="inline" justifyContent="space-between">
+              <s-text type="strong">Total Savings</s-text>
 
-              <s-text type="strong">
-                $41.25
-              </s-text>
+              <s-text type="strong">$41.25</s-text>
             </s-stack>
-
           </s-stack>
         </s-box>
-
-        <s-checkbox>
-          Join VIP Membership
-        </s-checkbox>
-
       </s-stack>
     </s-box>
   );

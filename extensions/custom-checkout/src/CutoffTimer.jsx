@@ -16,9 +16,9 @@ function CutoffTimer() {
     let isMounted = true;
 
     async function init() {
-      const storageKey = 'checkout_timer_start_time';
+      const storageKey = "checkout_timer_start_time";
       let startStr = await api.storage.read(storageKey);
-      
+
       let startTime;
       if (!startStr) {
         startTime = Date.now();
@@ -35,7 +35,7 @@ function CutoffTimer() {
 
       timer = setInterval(() => {
         const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-        const remaining = (8 * 3600) - (elapsedSeconds % (8 * 3600));
+        const remaining = 8 * 3600 - (elapsedSeconds % (8 * 3600));
         setTimeLeft(remaining);
       }, 1000);
     }
@@ -52,25 +52,32 @@ function CutoffTimer() {
   const minutes = Math.floor((timeLeft % 3600) / 60);
 
   return (
-    <s-banner tone="success">
-      <s-stack gap="extra-tight" alignItems="center">
-        <s-stack direction="inline" gap="small-100" alignItems="center">
+    <s-box
+      padding="large"
+      border="base base solid"
+      borderRadius="large"
+      background="base"
+    >
+      <s-stack gap="none" alignItems="start">
+        <s-stack direction="inline" gap="small-100" alignItems="start">
           {/* <s-icon type="clock" size="small" tone="success" /> */}
-          <s-text type="strong" tone="success">
-            SHIPPING CUTOFF
-          </s-text>
+          <s-text type="strong">SHIPPING CUTOFF</s-text>
         </s-stack>
-        <s-text type="strong">
-          Order within{" "}
-          <s-text type="strong" tone="success">
+        <s-stack direction="inline" gap="small-100" alignItems="start" padding="small none none none">
+          <s-text type="strong">Order within</s-text>
+
+          <s-text type="strong">
             {hours}h {String(minutes).padStart(2, "0")}m
-          </s-text>{" "}
-          <s-badge tone="auto">SAME-DAY</s-badge>
-        </s-text>
-        <s-text type="small" color="subdued">
-          For same-day processing (Mon-Fri, cutoff 2:00 PM EST)
-        </s-text>
+          </s-text>
+
+          <s-badge tone="neutral">
+            <s-text>SAME-DAY</s-text>
+          </s-badge>
+        </s-stack>
+          <s-text type="small" color="subdued">
+            For Same-day processing (Mon-Fri, cutoff 2:00 PM EST)
+          </s-text>
       </s-stack>
-    </s-banner>
+    </s-box>
   );
 }
